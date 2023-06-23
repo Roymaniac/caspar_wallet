@@ -1,1 +1,1 @@
-# casper_wallet
+# caspar_wallet

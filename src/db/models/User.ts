@@ -5,6 +5,8 @@ class User extends Model {
   username!: string;
   email!: string;
   password!: string;
+  activationToken!: string;
+  isActive!: boolean;
 
   static tableName = 'users';
 }

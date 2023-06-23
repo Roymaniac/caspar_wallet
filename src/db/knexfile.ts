@@ -1,12 +1,8 @@
-import type { Knex } from "knex";
 import dotenv from "dotenv";
-import path from "path";
-
 dotenv.config()
 const PORT = Number(process.env.DB_PORT)
 
 // Update with your config settings.
-
 
 const config: object = {
   development: {
@@ -47,6 +43,5 @@ const config: object = {
   }
 
 };
-
 
 export default config

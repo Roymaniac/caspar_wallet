@@ -6,6 +6,7 @@ import { logger } from "../helpers/logger";
 import { generateJWTToken } from "../helpers/token.generator";
 import { Model } from "objection";
 import User from "../db/models/User";
+import { sendActivationEmail } from "../mail/sendActivationEmail";
 
 Model.knex(db);
 
@@ -37,6 +38,7 @@ export const register = async (req: Request, res: Response) => {
     }
 
     const id = uuidv4(); // Generate a UUID for the 'id' field
+    const activationToken = uuidv4()
     // Hash the password
     const hashedPassword = bcrypt.hashSync(password, 10);
     // Create a new user
@@ -45,7 +47,10 @@ export const register = async (req: Request, res: Response) => {
       username,
       email,
       password: hashedPassword,
+      activationToken: activationToken,
     });
+
+    sendActivationEmail(email, activationToken);
 
   // Check user data and return a response
   if (newUser) {

@@ -11,7 +11,9 @@ export async function up(knex: Knex): Promise<void> {
         table.uuid("id").primary();
         table.string("username", 200).notNullable();
         table.string("email", 100).unique();
-        table.string("password")
+        table.string("password");
+        table.string("activationToken");
+        table.boolean('isActive').defaultTo(false);
         table.timestamps(true, true);
     });
 }

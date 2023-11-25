@@ -1,5 +1,5 @@
 import express, { type Express, type Request, type Response } from 'express';
-import { logger } from './helpers/logger';
+import { logger } from './utils/logger';
 import './db/db.config';
 import { errorHandler } from './middlewares/errorMiddleware';
 import authRouter from './routes/auth.routes';

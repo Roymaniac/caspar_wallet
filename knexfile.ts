@@ -1,5 +1,5 @@
 import type { Knex } from 'knex';
-import { environs } from './src/helpers/config';
+import { environs } from './src/utils/config';
 const { DB_NAME, DB_HOST, DB_PORT, DB_USER, DB_PASSWORD } = environs;
 // Update with your config settings.
 

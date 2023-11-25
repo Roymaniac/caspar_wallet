@@ -1,5 +1,4 @@
-import { Knex } from "knex";
-
+import { type Knex } from 'knex';
 
 /**
  * Run the migrations.
@@ -7,17 +6,16 @@ import { Knex } from "knex";
  */
 
 export async function up(knex: Knex): Promise<void> {
-    return knex.schema.createTable("users", table => {
-        table.uuid("id").primary();
-        table.string("username", 200).notNullable();
-        table.string("email", 100).unique();
-        table.string("password");
-        table.string("activationToken");
-        table.boolean('isActive').defaultTo(false);
-        table.timestamps(true, true);
-    });
+  await knex.schema.createTable('users', (table) => {
+    table.uuid('id').primary();
+    table.string('username', 200).notNullable();
+    table.string('email', 100).unique();
+    table.string('password');
+    table.string('activationToken');
+    table.boolean('isActive').defaultTo(false);
+    table.timestamps(true, true);
+  });
 }
-
 
 /**
  * Reverse the migrations.
@@ -25,5 +23,5 @@ export async function up(knex: Knex): Promise<void> {
  */
 
 export async function down(knex: Knex): Promise<void> {
-    return knex.schema.dropTableIfExists("users");
+  await knex.schema.dropTableIfExists('users');
 }

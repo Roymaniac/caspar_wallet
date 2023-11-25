@@ -1,5 +1,4 @@
-import { Knex } from "knex";
-
+import { type Knex } from 'knex';
 
 /**
  * Run the migrations.
@@ -7,17 +6,19 @@ import { Knex } from "knex";
  */
 
 export async function up(knex: Knex): Promise<void> {
-    return knex.schema.createTable("wallets", table => {
-        table.uuid("id").primary();
-        table.decimal("balance", 8, 2);
-        table.uuid('user_id').nullable()
-        table.foreign("user_id").references("users.id").onDelete("cascade");
-        table.uuid('currency_id').nullable()
-        table.foreign("currency_id").references("currencies.id").onDelete("cascade");
-        table.timestamps(true, true);
-    })
+  await knex.schema.createTable('wallets', (table) => {
+    table.uuid('id').primary();
+    table.decimal('balance', 8, 2);
+    table.uuid('user_id').nullable();
+    table.foreign('user_id').references('users.id').onDelete('cascade');
+    table.uuid('currency_id').nullable();
+    table
+      .foreign('currency_id')
+      .references('currencies.id')
+      .onDelete('cascade');
+    table.timestamps(true, true);
+  });
 }
-
 
 /**
  * Reverse the migrations.
@@ -25,5 +26,5 @@ export async function up(knex: Knex): Promise<void> {
  */
 
 export async function down(knex: Knex): Promise<void> {
-    return knex.schema.dropTableIfExists("wallets");
+  await knex.schema.dropTableIfExists('wallets');
 }

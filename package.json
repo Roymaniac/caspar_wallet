@@ -4,17 +4,31 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "migrate": "npx knex migrate:latest --knexfile src/db/knexfile.ts",
-    "rollback": "npx knex migrate:rollback --all --knexfile src/db/knexfile.ts",
-    "status": "npx knex migrate:status --knexfile src/db/knexfile.ts",
+    "migrate": "npx knex migrate:latest --knexfile ./knexfile.ts",
+    "rollback": "npx knex migrate:rollback --all --knexfile ./knexfile.ts",
+    "status": "npx knex migrate:status --knexfile ./knexfile.ts",
     "start:dev": "nodemon",
     "build": "rimraf ./build && tsc",
-    "dev": "nodemon -q build/index.js"
+    "dev": "nodemon -q build/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --ext .ts --fix",
+      "prettier --write",
+      "git add"
+    ]
+  },
   "devDependencies": {
+    "@faker-js/faker": "^8.3.1",
     "@types/bcrypt": "^5.0.0",
     "@types/express": "^4.17.14",
     "@types/jsonwebtoken": "^9.0.2",
@@ -22,16 +36,25 @@
     "@types/node": "^18.11.2",
     "@types/nodemailer": "^6.4.8",
     "@types/uuid": "^9.0.2",
+    "@typescript-eslint/eslint-plugin": "^6.12.0",
+    "@typescript-eslint/parser": "^6.12.0",
+    "eslint": "^8.54.0",
+    "eslint-config-standard-with-typescript": "^40.0.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-n": "^16.3.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "husky": "^8.0.3",
     "nodemon": "^2.0.20",
+    "prettier": "3.1.0",
     "ts-node": "^10.9.1",
-    "typescript": "^4.8.4"
+    "typescript": "^4.9.5"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
-    "knex": "^2.3.0",
+    "knex": "2.4.0",
     "mysql": "^2.18.1",
     "nodemailer": "^6.9.3",
     "objection": "^3.0.1",
